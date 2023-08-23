@@ -1,6 +1,6 @@
 package com.liangzc.demo.controller;
 
-import com.example.springboottest.dto.DateDto;
+import com.liangzc.demo.dto.DateDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
