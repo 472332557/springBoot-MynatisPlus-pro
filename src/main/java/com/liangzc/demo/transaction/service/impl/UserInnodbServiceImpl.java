@@ -1,10 +1,10 @@
 package com.liangzc.demo.transaction.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.springboottest.transaction.dao.PersonTestMapper;
-import com.example.springboottest.transaction.dao.UserInnodbMapper;
-import com.example.springboottest.transaction.model.UserInnodb;
-import com.example.springboottest.transaction.service.UserInnodbService;
+import com.liangzc.demo.transaction.dao.PersonTestMapper;
+import com.liangzc.demo.transaction.dao.UserInnodbMapper;
+import com.liangzc.demo.transaction.model.UserInnodb;
+import com.liangzc.demo.transaction.service.UserInnodbService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +16,7 @@ import java.util.List;
  * @Description:
  */
 @Service
-public class UserInnodbServiceImpl extends ServiceImpl<UserInnodbMapper,UserInnodb> implements UserInnodbService {
+public class UserInnodbServiceImpl extends ServiceImpl<UserInnodbMapper, UserInnodb> implements UserInnodbService {
 
     @Autowired
     private UserInnodbMapper userInnodbMapper;

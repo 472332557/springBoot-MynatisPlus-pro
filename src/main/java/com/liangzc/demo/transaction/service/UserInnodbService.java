@@ -1,7 +1,7 @@
 package com.liangzc.demo.transaction.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.example.springboottest.transaction.model.UserInnodb;
+import com.liangzc.demo.transaction.model.UserInnodb;
 
 import java.util.List;
 
