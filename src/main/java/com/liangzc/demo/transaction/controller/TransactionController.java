@@ -40,19 +40,9 @@ public class TransactionController {
         List<UserInnodb> userInnodbList = userInnodbService.selectList();
         List<PersonTest> personTestList = personTestService.selectList();
 
-        userInnodbList.stream().forEach(new Consumer<UserInnodb>() {
-            @Override
-            public void accept(UserInnodb userInnodb) {
-                System.out.println(userInnodb);
-            }
-        });
+        userInnodbList.stream().forEach(userInnodb -> System.out.println(userInnodb));
 
-        personTestList.stream().forEach(new Consumer<PersonTest>() {
-            @Override
-            public void accept(PersonTest personTest) {
-                System.out.println(personTest);
-            }
-        });
+        personTestList.stream().forEach(personTest -> System.out.println(personTest));
 
         return JSON.toJSONString(userInnodbList).concat(JSON.toJSONString(personTestList));
     }
