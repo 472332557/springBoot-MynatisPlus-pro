@@ -57,6 +57,13 @@ public class TransactionController {
         return JSON.toJSONString(userInnodbList).concat(JSON.toJSONString(personTestList));
     }
 
+    @GetMapping("/queryLambda")
+    public String queryLambda(){
+
+        List<UserInnodb> list = userInnodbService.lambdaQuery().eq(UserInnodb::getGender, 0).list();
+        return JSON.toJSONString(list);
+    }
+
 
 
     @GetMapping("/doUpdate")
