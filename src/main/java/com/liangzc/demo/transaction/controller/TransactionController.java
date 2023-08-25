@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 /**
  * @Auther: liangzc
@@ -51,7 +52,8 @@ public class TransactionController {
     public String queryLambda(){
 
         List<UserInnodb> list = userInnodbService.lambdaQuery().eq(UserInnodb::getGender, 0).list();
-        return JSON.toJSONString(list);
+        List<UserInnodb> innodbList = list.stream().filter(e -> !e.getName().equals("张晓")).collect(Collectors.toList());
+        return JSON.toJSONString(innodbList);
     }
 
 
