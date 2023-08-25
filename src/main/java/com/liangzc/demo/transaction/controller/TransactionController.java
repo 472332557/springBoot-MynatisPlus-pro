@@ -53,6 +53,12 @@ public class TransactionController {
 
         List<UserInnodb> list = userInnodbService.lambdaQuery().eq(UserInnodb::getGender, 0).list();
         List<UserInnodb> innodbList = list.stream().filter(e -> !e.getName().equals("张晓")).collect(Collectors.toList());
+        innodbList.stream().forEach(new Consumer<UserInnodb>() {
+            @Override
+            public void accept(UserInnodb userInnodb) {
+                System.out.println(userInnodb);
+            }
+        });
         return JSON.toJSONString(innodbList);
     }
 
