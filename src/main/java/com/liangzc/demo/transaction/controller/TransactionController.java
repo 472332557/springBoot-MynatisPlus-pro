@@ -3,6 +3,7 @@ package com.liangzc.demo.transaction.controller;
 import com.alibaba.fastjson2.JSON;
 import com.liangzc.demo.transaction.model.PersonTest;
 import com.liangzc.demo.transaction.model.UserInnodb;
+import com.liangzc.demo.transaction.service.BillFileService;
 import com.liangzc.demo.transaction.service.OperateService;
 import com.liangzc.demo.transaction.service.PersonTestService;
 import com.liangzc.demo.transaction.service.UserInnodbService;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
@@ -32,6 +34,9 @@ public class TransactionController {
 
     @Autowired
     private OperateService operateService;
+
+    @Resource
+    private BillFileService billFileService;
 
 
 
@@ -73,6 +78,11 @@ public class TransactionController {
     @GetMapping("/insertNoSupport")
     public void insertNoSupport(){
         operateService.insertNoSupport();
+    }
+
+
+    public void billFileOperate(){
+        billFileService.saveBillFile();
     }
 
 }
