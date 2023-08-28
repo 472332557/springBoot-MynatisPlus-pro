@@ -27,26 +27,27 @@
 
 		<!-- 生成model模型，对应的包路径，以及文件存放路径(targetProject)，targetProject可以指定具体的路径 也可以使用“MAVEN”来自动生成，这样生成的代码会在target/generatord-source目录下
          targetProject:自动生成代码的位置 -->
-		<javaModelGenerator targetPackage="com.example.springboottest.transaction.model" targetProject="src\main\java\">
+		<javaModelGenerator targetPackage="com.liangzc.demo.transaction.model" targetProject="src\main\java\">
 			<property name="enableSubPackages" value="true" />
 			<!-- 从数据库返回的值被清理前后的空格 -->
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
 
 		<!--对应的mapper.xml文件  -->
-		<sqlMapGenerator targetPackage="com.example.springboottest.transaction.dao" targetProject="src\main\resources\">
+		<sqlMapGenerator targetPackage="com.liangzc.demo.transaction.dao" targetProject="src\main\resources\">
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
 
 		<!-- 对应的Mapper接口类文件 -->
-		<javaClientGenerator type="XMLMAPPER" targetPackage="com.example.springboottest.transaction.dao" targetProject="src\main\java\">
+		<javaClientGenerator type="XMLMAPPER" targetPackage="com.liangzc.demo.transaction.dao" targetProject="src\main\java\">
 			<property name="enableSubPackages" value="true" />
 			<!--<property name="rootInterface" value="com.segi.uhomecp.charging.common.dao.AbstractMapperDao" />-->
 		</javaClientGenerator>
 
 		<!-- 生成那些表，tableName对应数据库表，domainObjectName对应实体类名 -->
-		<table schema="own" tableName="user_innodb" domainObjectName="UserInnodb" />
-		<table schema="own" tableName="person_test" domainObjectName="PersonTest" />
+<!--		<table schema="own" tableName="user_innodb" domainObjectName="UserInnodb" />-->
+<!--		<table schema="own" tableName="person_test" domainObjectName="PersonTest" />-->
+		<table schema="own" tableName="bill_file" domainObjectName="BillFile" />
 <!--		<table schema="uhome" tableName="bill_settle_calc_res" domainObjectName="SettleCalcRes" />
 		<table schema="uhome" tableName="bill_settle_calc_detail" domainObjectName="SettleCalcDetail" />-->
 
