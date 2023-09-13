@@ -34,7 +34,7 @@ class DemoApplicationTests {
         Period period = Period.between(date1, date2);
         int diff = period.getMonths() + period.getYears() * 12;
         System.out.println("两个日期之间相差 " + diff + " 个月");
-        
+
     }
 
 
@@ -80,6 +80,43 @@ class DemoApplicationTests {
         personTestMapper.insertBatchSomeColumn(list);
         System.out.println("--------------------耗时："+(System.currentTimeMillis() - start));
     }
+
+
+    @Test
+    public void batchUpdate(){
+        long start = System.currentTimeMillis();
+        List<PersonTest> list = new ArrayList<>();
+        for (int i = 400018; i < 410018; i++) {
+            PersonTest personTest = new PersonTest();
+            personTest.setName("测试"+i);
+            personTest.setAge(i);
+            personTest.setId(i);
+            list.add(personTest);
+        }
+        System.out.println("集合大小："+list.size());
+        personTestMapper.updateBatchById(list);
+        System.out.println("--------------------耗时："+(System.currentTimeMillis() - start));
+    }
+
+
+    @Test
+    public void batchUpdateMybatis(){
+        long start = System.currentTimeMillis();
+        List<PersonTest> list = new ArrayList<>();
+        for (int i = 410018; i < 420018; i++) {
+            PersonTest personTest = new PersonTest();
+            personTest.setName("测试"+i);
+            personTest.setAge(i);
+            personTest.setId(i);
+            list.add(personTest);
+        }
+        System.out.println("集合大小："+list.size());
+        personTestService.updateBatchById(list,10000);
+        System.out.println("--------------------耗时："+(System.currentTimeMillis() - start));
+    }
+
+
+
 
 
 }
