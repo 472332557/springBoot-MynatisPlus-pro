@@ -120,7 +120,7 @@ class DemoApplicationTests {
     public void batchUpdateSomeColumns(){
         long start = System.currentTimeMillis();
         List<PersonTest> list = new ArrayList<>();
-            for (int i = 420018; i < 430018; i++) {
+            for (int i = 440018; i < 460018; i++) {
             PersonTest personTest = new PersonTest();
             personTest.setName("测试"+i);
             personTest.setAge(i);
@@ -128,9 +128,24 @@ class DemoApplicationTests {
             list.add(personTest);
         }
         System.out.println("集合大小："+list.size());
-        personTestMapper.updateBatchById(list);
+        personTestMapper.updateBatchSomeColumn(list);
         System.out.println("--------------------耗时："+(System.currentTimeMillis() - start));
     }
 
-
+    @Test
+    public void subTest(){
+        long start = System.currentTimeMillis();
+        List<PersonTest> list = new ArrayList<>();
+        for (int i = 440018; i < 460018; i++) {
+            PersonTest personTest = new PersonTest();
+            personTest.setName("测试"+i);
+            personTest.setAge(i);
+            personTest.setId(i);
+            list.add(personTest);
+        }
+        System.out.println("集合大小："+list.size());
+        List<PersonTest> list1 = list.subList(0, 1);
+        System.out.println(list1);
+        System.out.println("--------------------耗时："+(System.currentTimeMillis() - start));
+    }
 }
