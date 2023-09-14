@@ -10,7 +10,6 @@ import org.springframework.context.annotation.Configuration;
  * @Description:
  */
 @Configuration
-@MapperScan("com.liangzc.demo.transaction.dao")
 public class MybatisPlusConfig {
 
     /**

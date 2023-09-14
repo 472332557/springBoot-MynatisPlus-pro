@@ -14,4 +14,13 @@ public interface MyBaseMapper<T> extends BaseMapper<T> {
 
     // 批量插入
     int insertBatchSomeColumn(@Param("list") List<T> batchList);
+
+    /**
+     * 批量更新（mysql）
+     * @param entityList
+     * @return
+     */
+    Integer updateBatchSomeColumn(@Param("list")List<T> entityList);
+
+
 }

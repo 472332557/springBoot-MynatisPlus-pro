@@ -116,7 +116,21 @@ class DemoApplicationTests {
     }
 
 
-
+    @Test
+    public void batchUpdateSomeColumns(){
+        long start = System.currentTimeMillis();
+        List<PersonTest> list = new ArrayList<>();
+            for (int i = 420018; i < 430018; i++) {
+            PersonTest personTest = new PersonTest();
+            personTest.setName("测试"+i);
+            personTest.setAge(i);
+            personTest.setId(i);
+            list.add(personTest);
+        }
+        System.out.println("集合大小："+list.size());
+        personTestMapper.updateBatchById(list);
+        System.out.println("--------------------耗时："+(System.currentTimeMillis() - start));
+    }
 
 
 }

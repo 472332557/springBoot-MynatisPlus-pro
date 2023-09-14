@@ -18,6 +18,7 @@ public class InsertBatchSqlInjector extends DefaultSqlInjector {
         List<AbstractMethod> methodList = super.getMethodList(mapperClass, tableInfo);
         // 添加自定义方法：批量插入，方法名为 insertBatchSomeColumn
         methodList.add(new InsertBatchSomeColumn());
+        methodList.add(new UpdateBatchSomeColumn());
         return methodList;
     }
 }
