@@ -1,12 +1,19 @@
 package com.liangzc.demo;
 
+import com.liangzc.demo.springContext.SpringContextUtil;
 import com.liangzc.demo.transaction.dao.PersonTestMapper;
 import com.liangzc.demo.transaction.model.PersonTest;
 import com.liangzc.demo.transaction.service.PersonTestService;
+import com.liangzc.demo.transaction.service.impl.BillFileServiceImpl;
+import com.liangzc.demo.transaction.service.impl.UserInnodbServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
@@ -20,6 +27,9 @@ class DemoApplicationTests {
 
     @Autowired
     private PersonTestMapper personTestMapper;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     @Test
     void contextLoads() {
@@ -147,5 +157,42 @@ class DemoApplicationTests {
         List<PersonTest> list1 = list.subList(0, 1);
         System.out.println(list1);
         System.out.println("--------------------耗时："+(System.currentTimeMillis() - start));
+    }
+
+
+    @Test
+    public void redisNx(){
+        Long key = 1213132132321L;
+        try{
+            Boolean ifAbsent = redisTemplate.opsForValue().setIfAbsent(key, key);
+            if (ifAbsent){
+                System.out.println("---------加锁成功！");
+            }
+            Boolean ifAbsent1 = redisTemplate.opsForValue().setIfAbsent(key, "新的值");
+            System.out.println(ifAbsent1);
+        }finally {
+            redisTemplate.delete(key);
+        }
+    }
+
+    @Test
+    public void springContext() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+
+        UserInnodbServiceImpl userInnodbService = SpringContextUtil.getBean(UserInnodbServiceImpl.class);
+        System.out.println(userInnodbService);
+        System.out.println(userInnodbService.selectList());
+
+        System.out.println("获取类路径："+this.getClass());
+
+        Method method2 = UserInnodbServiceImpl.class.getDeclaredMethod("method2", String.class);
+        method2.setAccessible(true);
+
+        for (int i = 0; i <10 ; i++) {
+            Object invoke = method2.invoke(userInnodbService, "反射私有方法调用第"+i+"次");
+            System.out.println(invoke);
+        }
+
+
+
     }
 }

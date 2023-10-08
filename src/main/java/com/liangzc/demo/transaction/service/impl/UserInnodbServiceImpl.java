@@ -28,4 +28,16 @@ public class UserInnodbServiceImpl extends ServiceImpl<UserInnodbMapper, UserInn
     public List<UserInnodb> selectList() {
         return userInnodbMapper.selectList(null);
     }
+
+    private String method2(String param){
+        System.out.println("这是一个private访问类型的方法!"+param);
+        return "这是一个private访问类型的方法!"+param;
+    }
+
+
+
+    private String method3(String param){
+        System.out.println("这是一个private访问类型的方法!"+param);
+        return "这是一个private访问类型的方法!"+param;
+    }
 }
