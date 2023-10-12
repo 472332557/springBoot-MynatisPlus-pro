@@ -3,7 +3,9 @@ package com.liangzc.demo;
 import com.liangzc.demo.springContext.SpringContextUtil;
 import com.liangzc.demo.transaction.dao.PersonTestMapper;
 import com.liangzc.demo.transaction.model.PersonTest;
+import com.liangzc.demo.transaction.model.UserInnodb;
 import com.liangzc.demo.transaction.service.PersonTestService;
+import com.liangzc.demo.transaction.service.UserInnodbService;
 import com.liangzc.demo.transaction.service.impl.BillFileServiceImpl;
 import com.liangzc.demo.transaction.service.impl.UserInnodbServiceImpl;
 import org.junit.jupiter.api.Test;
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -30,6 +33,9 @@ class DemoApplicationTests {
 
     @Autowired
     private RedisTemplate redisTemplate;
+
+    @Autowired
+    private UserInnodbService userInnodbService;
 
     @Test
     void contextLoads() {
@@ -194,5 +200,12 @@ class DemoApplicationTests {
 
 
 
+    }
+
+
+    @Test
+    public void updateLambda(){
+        boolean update = userInnodbService.lambdaUpdate().set(UserInnodb::getName, "蒋净杭").eq(UserInnodb::getId, 10).update();
+        System.out.println(update);
     }
 }
