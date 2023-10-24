@@ -199,6 +199,10 @@ class DemoApplicationTests {
         }
 
 
+        Method method5 = UserInnodbServiceImpl.class.getDeclaredMethod("method5", boolean.class,Long.class,UserInnodb.class,String.class);
+        method5.setAccessible(true);
+        method5.invoke(userInnodbService, false, null,new UserInnodb());
+
 
     }
 
@@ -207,5 +211,12 @@ class DemoApplicationTests {
     public void updateLambda(){
         boolean update = userInnodbService.lambdaUpdate().set(UserInnodb::getName, "蒋净杭").eq(UserInnodb::getId, 10).update();
         System.out.println(update);
+    }
+
+
+    @Test
+    public void queryLambda(){
+        List<UserInnodb> list = userInnodbService.lambdaQuery().gt(UserInnodb::getId, 10).list();
+        System.out.println(list);
     }
 }
