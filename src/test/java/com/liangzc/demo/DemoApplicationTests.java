@@ -86,7 +86,7 @@ class DemoApplicationTests {
     public void insertBatchSomeColumnTest(){
         long start = System.currentTimeMillis();
         List<PersonTest> list = new ArrayList<>();
-        for (int i = 0; i < 100000; i++) {
+        for (int i = 401001; i < 411001; i++) {
             PersonTest personTest = new PersonTest();
             personTest.setAge(i);
             personTest.setGender(i);
@@ -136,7 +136,7 @@ class DemoApplicationTests {
     public void batchUpdateSomeColumns(){
         long start = System.currentTimeMillis();
         List<PersonTest> list = new ArrayList<>();
-            for (int i = 440018; i < 460018; i++) {
+            for (int i = 500018; i <= 501001; i++) {
             PersonTest personTest = new PersonTest();
             personTest.setName("测试"+i);
             personTest.setAge(i);
