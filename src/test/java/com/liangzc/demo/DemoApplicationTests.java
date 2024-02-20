@@ -6,14 +6,13 @@ import com.liangzc.demo.transaction.model.PersonTest;
 import com.liangzc.demo.transaction.model.UserInnodb;
 import com.liangzc.demo.transaction.service.PersonTestService;
 import com.liangzc.demo.transaction.service.UserInnodbService;
-import com.liangzc.demo.transaction.service.impl.BillFileServiceImpl;
 import com.liangzc.demo.transaction.service.impl.UserInnodbServiceImpl;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -23,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootTest
+@Slf4j
 class DemoApplicationTests {
 
     @Autowired
@@ -218,5 +218,25 @@ class DemoApplicationTests {
     public void queryLambda(){
         List<UserInnodb> list = userInnodbService.lambdaQuery().gt(UserInnodb::getId, 10).list();
         System.out.println(list);
+    }
+
+
+    @Test
+    @Transactional(rollbackFor = {Exception.class, Error.class})
+    public void catchTest(){
+
+        PersonTest personTest = new PersonTest();
+        personTest.setAge(100);
+        personTest.setGender(1);
+        personTest.setName("老者");
+        int a = 18;
+        int b = 0;
+        try {
+            personTestService.save(personTest);
+            int c = a / b;
+        }catch (Exception e) {
+            log.error("异常了：{}",e.getMessage());
+            personTestService.insertObj();
+        }
     }
 }
