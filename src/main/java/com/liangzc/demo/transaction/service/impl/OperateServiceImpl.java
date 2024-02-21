@@ -36,11 +36,11 @@ public class OperateServiceImpl implements OperateService {
 //        personTest.setGender(0);
 //        personTest.setName("小魔女");
 //        personTestService.save(personTest);
-
-        UserInnodb userInnodb = new UserInnodb();
-        userInnodb.setName("张晓");
-        userInnodb.setGender(Boolean.FALSE);
-        userInnodb.setPhone("13265263203");
+        UserInnodb userInnodb = UserInnodb.builder()
+                .name("张晓")
+                .gender(Boolean.FALSE)
+                .phone("13265263203")
+                .build();
         userInnodbService.save(userInnodb);
 //        System.out.println(6 / 0);
 
