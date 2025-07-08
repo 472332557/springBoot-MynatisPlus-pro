@@ -3,6 +3,7 @@ package com.liangzc.demo;
 import com.baomidou.mybatisplus.core.metadata.TableInfo;
 import com.baomidou.mybatisplus.core.metadata.TableInfoHelper;
 import com.liangzc.demo.rec.model.po.Receivable;
+import com.liangzc.demo.rec.service.IReceivableService;
 import com.liangzc.demo.springContext.SpringContextUtil;
 import com.liangzc.demo.transaction.mapper.PersonTestMapper;
 import com.liangzc.demo.transaction.model.PersonTest;
@@ -11,15 +12,18 @@ import com.liangzc.demo.transaction.service.PersonTestService;
 import com.liangzc.demo.transaction.service.UserInnodbService;
 import com.liangzc.demo.transaction.service.impl.UserInnodbServiceImpl;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.type.JdbcType;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.sql.*;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
@@ -40,6 +44,9 @@ class DemoApplicationTests {
 
     @Autowired
     private UserInnodbService userInnodbService;
+
+    @Resource
+    private IReceivableService receivableService;
 
     @Test
     void contextLoads() {
@@ -246,18 +253,41 @@ class DemoApplicationTests {
 
     @Test
     public void tableModelTest(){
+        List<Receivable> receivables = receivableService.getBaseMapper().selectList(null);
         TableInfo tableInfo = TableInfoHelper.getTableInfo(Receivable.class);
         log.info("tableInfo:{}",tableInfo);
         tableInfo.getFieldList().forEach(fieldInfo -> {
             Field field = fieldInfo.getField();
             log.info("field:{}",field.getName());
-
+            
+            // 获取字段类型
+            Class<?> fieldType = field.getType();
+            log.info("fieldType:{}", fieldType.getName());
+            log.info("fieldType:{}", fieldType.getSimpleName().toLowerCase());
+            
+            // 如果jdbcType为null，可以手动映射Java类型到JDBC类型
+            JdbcType jdbcType = fieldInfo.getJdbcType();
+            log.info("jdbcType:{}", jdbcType != null ? jdbcType.name() : "UNKNOWN");
+            
             String column = fieldInfo.getColumn();
             log.info("column:{}",column);
-
             log.info("--------------------------");
-//            log.info("fieldInfo:{}",fieldInfo);
         });
+    }
 
+    @Test
+    public void getMetaInfo() throws SQLException {
+        try(Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/bop_charge?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=UT&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true", "root", "lzc2025666")) {
+            DatabaseMetaData metaData = connection.getMetaData();
+            try(ResultSet resultSet = metaData.getColumns(null, null, "rec_receivable", null)) {
+                while (resultSet.next()){
+                    log.info("columnName:{}",resultSet.getString("COLUMN_NAME"));
+                    log.info("columnType:{}",resultSet.getString("TYPE_NAME"));
+                    log.info("columnSize:{}",resultSet.getInt("COLUMN_SIZE"));
+                    log.info("REMARKS:{}",resultSet.getString("REMARKS"));
+                    log.info("--------------------------");
+                }
+            }
+        }
     }
 }
