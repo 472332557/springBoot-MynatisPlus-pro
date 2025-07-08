@@ -1,7 +1,10 @@
 package com.liangzc.demo;
 
+import com.baomidou.mybatisplus.core.metadata.TableInfo;
+import com.baomidou.mybatisplus.core.metadata.TableInfoHelper;
+import com.liangzc.demo.rec.model.po.RecReceivable;
 import com.liangzc.demo.springContext.SpringContextUtil;
-import com.liangzc.demo.transaction.dao.PersonTestMapper;
+import com.liangzc.demo.transaction.mapper.PersonTestMapper;
 import com.liangzc.demo.transaction.model.PersonTest;
 import com.liangzc.demo.transaction.model.UserInnodb;
 import com.liangzc.demo.transaction.service.PersonTestService;
@@ -14,6 +17,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.time.LocalDate;
@@ -238,5 +242,22 @@ class DemoApplicationTests {
             log.error("异常了：{}",e.getMessage());
             personTestService.insertObj();
         }
+    }
+
+    @Test
+    public void tableModelTest(){
+        TableInfo tableInfo = TableInfoHelper.getTableInfo(RecReceivable.class);
+        log.info("tableInfo:{}",tableInfo);
+        tableInfo.getFieldList().forEach(fieldInfo -> {
+            Field field = fieldInfo.getField();
+            log.info("field:{}",field.getName());
+
+            String column = fieldInfo.getColumn();
+            log.info("column:{}",column);
+
+            log.info("--------------------------");
+//            log.info("fieldInfo:{}",fieldInfo);
+        });
+
     }
 }

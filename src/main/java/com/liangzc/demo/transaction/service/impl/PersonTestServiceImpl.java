@@ -1,7 +1,7 @@
 package com.liangzc.demo.transaction.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.liangzc.demo.transaction.dao.PersonTestMapper;
+import com.liangzc.demo.transaction.mapper.PersonTestMapper;
 import com.liangzc.demo.transaction.model.PersonTest;
 import com.liangzc.demo.transaction.service.PersonTestService;
 import org.springframework.beans.factory.annotation.Autowired;

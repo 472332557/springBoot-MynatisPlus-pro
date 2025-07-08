@@ -1,4 +1,4 @@
-package com.liangzc.demo.transaction.dao;
+package com.liangzc.demo.transaction.mapper;
 
 import com.liangzc.demo.transaction.model.BillFile;
 import com.liangzc.demo.transaction.model.BillFileCriteria;

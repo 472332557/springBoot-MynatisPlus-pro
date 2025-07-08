@@ -1,6 +1,6 @@
 package com.liangzc.demo.transaction.service.impl;
 
-import com.liangzc.demo.transaction.dao.BillFileMapper;
+import com.liangzc.demo.transaction.mapper.BillFileMapper;
 import com.liangzc.demo.transaction.service.BillFileService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
