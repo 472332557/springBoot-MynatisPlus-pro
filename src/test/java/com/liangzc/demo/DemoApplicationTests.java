@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.core.metadata.TableInfoHelper;
 import com.liangzc.demo.rec.model.po.Receivable;
 import com.liangzc.demo.rec.service.IReceivableService;
 import com.liangzc.demo.springContext.SpringContextUtil;
+import com.liangzc.demo.tablemeta.model.po.FieldInfo;
+import com.liangzc.demo.tablemeta.service.TableMetaService;
 import com.liangzc.demo.transaction.mapper.PersonTestMapper;
 import com.liangzc.demo.transaction.model.PersonTest;
 import com.liangzc.demo.transaction.model.UserInnodb;
@@ -47,6 +49,9 @@ class DemoApplicationTests {
 
     @Resource
     private IReceivableService receivableService;
+
+    @Autowired
+    private TableMetaService tableMetaService;
 
     @Test
     void contextLoads() {
@@ -289,5 +294,12 @@ class DemoApplicationTests {
                 }
             }
         }
+    }
+
+
+    @Test
+    public void getTableFields() {
+        List<FieldInfo> tableFields = tableMetaService.getTableFields("rec_receivable");
+        log.info("tableFields:{}",tableFields);
     }
 }
