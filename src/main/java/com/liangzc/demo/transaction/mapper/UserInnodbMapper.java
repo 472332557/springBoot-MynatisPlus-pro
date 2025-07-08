@@ -1,4 +1,4 @@
-package com.liangzc.demo.transaction.dao;
+package com.liangzc.demo.transaction.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.liangzc.demo.transaction.model.UserInnodb;

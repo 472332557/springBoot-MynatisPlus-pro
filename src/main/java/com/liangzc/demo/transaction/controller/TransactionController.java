@@ -61,6 +61,13 @@ public class TransactionController {
         return JSON.toJSONString(innodbList);
     }
 
+    @GetMapping("/updateLambda")
+    public void updateLambda(){
+
+        boolean update = userInnodbService.lambdaUpdate().set(UserInnodb::getName, "蒋净杭111").eq(UserInnodb::getId, 10).update();
+        System.out.println(update);
+    }
+
 
 
     @GetMapping("/doUpdate")

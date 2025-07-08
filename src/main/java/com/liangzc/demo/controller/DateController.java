@@ -2,11 +2,10 @@ package com.liangzc.demo.controller;
 
 import com.liangzc.demo.dto.DateDto;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.swing.*;
+import java.awt.*;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -17,7 +16,7 @@ import java.time.format.DateTimeFormatter;
  * @Description:
  */
 @RestController
-@RequestMapping("/date")
+@RequestMapping("/say")
 @Slf4j
 public class DateController {
 
@@ -28,5 +27,12 @@ public class DateController {
         LocalDateTime localDateTime = LocalDateTime.ofInstant(dateDto.getReceivableMonth().toInstant(), ZoneId.systemDefault());
         String format = localDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         return format;
+    }
+
+
+    @GetMapping("/guoguo")
+    public String guoguo(){
+
+        return "郭郭是个笨猪呀！！！";
     }
 }
