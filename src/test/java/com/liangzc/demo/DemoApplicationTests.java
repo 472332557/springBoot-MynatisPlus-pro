@@ -2,7 +2,7 @@ package com.liangzc.demo;
 
 import com.baomidou.mybatisplus.core.metadata.TableInfo;
 import com.baomidou.mybatisplus.core.metadata.TableInfoHelper;
-import com.liangzc.demo.rec.model.po.RecReceivable;
+import com.liangzc.demo.rec.model.po.Receivable;
 import com.liangzc.demo.springContext.SpringContextUtil;
 import com.liangzc.demo.transaction.mapper.PersonTestMapper;
 import com.liangzc.demo.transaction.model.PersonTest;
@@ -246,7 +246,7 @@ class DemoApplicationTests {
 
     @Test
     public void tableModelTest(){
-        TableInfo tableInfo = TableInfoHelper.getTableInfo(RecReceivable.class);
+        TableInfo tableInfo = TableInfoHelper.getTableInfo(Receivable.class);
         log.info("tableInfo:{}",tableInfo);
         tableInfo.getFieldList().forEach(fieldInfo -> {
             Field field = fieldInfo.getField();

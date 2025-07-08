@@ -12,7 +12,7 @@ import org.springframework.stereotype.Controller;
  * @since 2025-07-08
  */
 @Controller
-@RequestMapping("/recReceivable")
-public class RecReceivableController {
+@RequestMapping("/receivable")
+public class ReceivableController {
 
 }

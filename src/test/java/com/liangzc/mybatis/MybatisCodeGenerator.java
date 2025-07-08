@@ -48,7 +48,9 @@ public class MybatisCodeGenerator {
 
         // 策略配置
         StrategyConfig strategyConfig = new StrategyConfig.Builder()
-                .addInclude("rec_receivable") // 表名
+                .addInclude(tableName)// 表名
+                // 添加此行：移除表前缀
+                .addTablePrefix(tablePrefix + "_")
                 .entityBuilder()
                 .naming(com.baomidou.mybatisplus.generator.config.rules.NamingStrategy.underline_to_camel)
                 .columnNaming(com.baomidou.mybatisplus.generator.config.rules.NamingStrategy.underline_to_camel)

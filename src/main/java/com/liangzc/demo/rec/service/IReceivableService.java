@@ -1,6 +1,6 @@
 package com.liangzc.demo.rec.service;
 
-import com.liangzc.demo.rec.model.po.RecReceivable;
+import com.liangzc.demo.rec.model.po.Receivable;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author liangzc
  * @since 2025-07-08
  */
-public interface IRecReceivableService extends IService<RecReceivable> {
+public interface IReceivableService extends IService<Receivable> {
 
 }

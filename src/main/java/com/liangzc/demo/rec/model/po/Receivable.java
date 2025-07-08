@@ -18,7 +18,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @TableName("rec_receivable")
-public class RecReceivable implements Serializable {
+public class Receivable implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

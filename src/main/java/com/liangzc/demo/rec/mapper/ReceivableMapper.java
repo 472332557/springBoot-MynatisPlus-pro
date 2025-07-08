@@ -1,6 +1,6 @@
 package com.liangzc.demo.rec.mapper;
 
-import com.liangzc.demo.rec.model.po.RecReceivable;
+import com.liangzc.demo.rec.model.po.Receivable;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author liangzc
  * @since 2025-07-08
  */
-public interface RecReceivableMapper extends BaseMapper<RecReceivable> {
+public interface ReceivableMapper extends BaseMapper<Receivable> {
 
 }
