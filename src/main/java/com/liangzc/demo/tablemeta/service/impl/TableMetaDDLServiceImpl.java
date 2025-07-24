@@ -80,6 +80,17 @@ public class TableMetaDDLServiceImpl implements TableMetaDDLService {
     private String buildDropColumnSql(String tableName, String columnName) {
         return String.format("ALTER TABLE `%s` DROP COLUMN `%s`;", tableName, columnName);
     }
+    
+    private String buildModifyColumnSql(String tableName, String columnName, TableColumnVO newColumn) {
+        return String.format("ALTER TABLE `%s` CHANGE COLUMN `%s` `%s` %s %s %s COMMENT '%s';",
+                tableName,
+                columnName,
+                newColumn.getColumnName(),
+                newColumn.getColumnType(),
+                "NO".equals(newColumn.getIsNullable()) ? "NOT NULL" : "NULL",
+                newColumn.getExtra() != null ? newColumn.getExtra() : "",
+                newColumn.getColumnComment());
+    }
 
     @Transactional
     public void executeDDL(String ddl) {
@@ -118,4 +129,16 @@ public class TableMetaDDLServiceImpl implements TableMetaDDLService {
         String ddl = buildDropColumnSql(tableName, columnName);
         executeDDL(ddl);
     }
-} 
+    
+    @Override
+    public void modifyColumn(String dbName, String tableName, String columnName, TableColumnVO newColumn) {
+        if (!tableExists(dbName, tableName)) {
+            throw new RuntimeException("表不存在");
+        }
+        if (!columnExists(dbName, tableName, columnName)) {
+            throw new RuntimeException("字段不存在");
+        }
+        String ddl = buildModifyColumnSql(tableName, columnName, newColumn);
+        executeDDL(ddl);
+    }
+}
