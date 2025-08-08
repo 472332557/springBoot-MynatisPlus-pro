@@ -16,4 +16,7 @@ public interface IReceivableService extends IService<Receivable> {
     String selectList();
 
     String selectListPeriodic();
+
+    String selectListByCustom();
+
 }

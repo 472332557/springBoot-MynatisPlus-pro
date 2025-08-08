@@ -36,4 +36,10 @@ public class ReceivableController {
         String result = receivableService.selectListPeriodic();
         return result;
     }
+
+    @RequestMapping(path = "/query3",method = RequestMethod.GET)
+    public String query3(){
+        String result = receivableService.selectListByCustom();
+        return result;
+    }
 }
