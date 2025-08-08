@@ -38,4 +38,16 @@ public class ReceivableServiceImpl extends ServiceImpl<ReceivableMapper, Receiva
         }, 10, TimeUnit.SECONDS);
         return "SUCCESS";
     }
+
+    @Override
+    public String selectListPeriodic() {
+        delayedTaskService.schedulePeriodicTask(() -> {
+            log.info("开始执行定时任务");
+            List<Receivable> list = this.lambdaQuery().list();
+            list.forEach(receivable -> {
+                log.info("receivable:{}", JSON.toJSONString(receivable));
+            });
+        }, 10, 5, TimeUnit.SECONDS);
+        return "SUCCESS";
+    }
 }
