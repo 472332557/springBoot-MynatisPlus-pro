@@ -74,6 +74,7 @@ public class ReceivableServiceImpl extends ServiceImpl<ReceivableMapper, Receiva
          *      1、线程池本身是线程安全的，可以被多个组件并发使用
          *      2、不会出现多个线程池实例同时存在的情况
          */
+        log.info("10s后执行。。。");
         ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
         scheduledExecutorService.schedule(() -> {
             log.info("开始执行定时任务");
