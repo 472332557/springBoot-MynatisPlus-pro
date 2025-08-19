@@ -1,11 +1,10 @@
 package com.liangzc.demo.common.service;
 
-import com.liangzc.demo.ThreadPoolConfig;
+import com.liangzc.demo.common.config.ThreadPoolConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 
-import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
