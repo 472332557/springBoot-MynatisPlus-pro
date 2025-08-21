@@ -1,0 +1,4 @@
+# 格式：接口全限定名=实现类全限定名（多个实现类用逗号分隔）
+com.liangzc.demo.transaction.service.MessageSender=\
+com.liangzc.demo.transaction.service.impl.EmailSender,\
+com.liangzc.demo.transaction.service.impl.SmsSender
