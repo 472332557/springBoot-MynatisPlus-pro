@@ -43,7 +43,11 @@ public class RedisController {
         return "success";
     }
 
-    @GetMapping("/redisson/draw")
+    /**
+     * redisson测试，测试set集合的抽奖
+     * @return
+     */
+    @GetMapping("/redisson/set")
     public String redissontest() {
         List<String> list = Arrays.asList("小明", "小李", "乐乐", "波比", "提莫", "海龟", "小于", "小萨");
         redissonClient.getSet("user").clear();
@@ -67,8 +71,20 @@ public class RedisController {
             Set<Object> user6 = redissonClient.getSet("user").removeRandom(1);
             log.info("一等奖中奖用户：{}", JSON.toJSONString(user6));
         }
-        return "";
+        return "SUCCESS";
     }
 
+    @GetMapping("/redisson/list")
+    public String redissonList() {
+        redissonClient.getList("comment_list").addAsync("Monday");
+        redissonClient.getList("comment_list").addAsync("Tuesday");
+        redissonClient.getList("comment_list").addAsync("Wednesday");
+        redissonClient.getList("comment_list").addAsync("Thursday");
+        redissonClient.getList("comment_list").addAsync("Friday");
+
+        log.info("按时间先后获取！");
+
+        return "SUCCESS";
+    }
 
 }
