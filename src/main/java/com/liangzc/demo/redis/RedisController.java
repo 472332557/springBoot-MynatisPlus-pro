@@ -23,7 +23,7 @@ public class RedisController {
     @Value("${query.count}")
     private Long count;
 
-    @Autowired(required = false)
+    @Resource
     private RedissonClient redissonClient;
 
     @RequestMapping("/set/{id}/{value}")
