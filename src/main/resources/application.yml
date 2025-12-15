@@ -1,0 +1,47 @@
+server:
+  port: 8088
+#  servlet:
+#    context-path: /springboot-demo
+
+#  spring.datasource.url=jdbc:mysql://localhost:3306/bop_charge?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=UTC&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+#  spring.datasource.username=root
+#  spring.datasource.password=lzc2025666
+#  spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+#  spring.datasource.hikari.connection-timeout=30000
+#  spring.datasource.hikari.idle-timeout=600000
+#  spring.datasource.hikari.max-lifetime=1800000
+#  spring.datasource.hikari.maximum-pool-size=100
+#  spring.datasource.hikari.minimum-idle=10
+#  spring.datasource.hikari.pool-name=HikaraPool-1
+
+spring:
+  application:
+    name: springBoot-MynatisPlus-pro
+  datasource:
+    url: jdbc:mysql://localhost:3306/bop_charge?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&allowMultiQueries=true&tinyInt1isBit=false&allowLoadLocalInfile=true&allowLocalInfileInMultiQueries=true&allowUrlInLocalInfile=true&allowPublicKeyRetrieval=true&allowMultiQueries=true&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: lzc2025666
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      maximum-pool-size: 100
+      minimum-idle: 10
+      pool-name: HikaraPool-1
+
+# redis 配置
+  redis:
+    host: 117.72.207.156
+    port: 6379
+    database: 0
+    timeout: 3000ms
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        max-wait: -1ms
+        min-idle: 0
+
+query:
+  count: 10
