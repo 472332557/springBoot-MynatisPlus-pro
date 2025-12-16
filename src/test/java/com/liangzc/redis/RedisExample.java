@@ -5,10 +5,12 @@ import com.liangzc.demo.DemoApplication;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.redisson.api.*;
+import org.redisson.client.protocol.ScoredEntry;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
 import javax.annotation.Resource;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
@@ -82,6 +84,36 @@ public class RedisExample {
         log.info("总的合并的人：{}", team3.get());
 
 
+    }
+
+    @Test
+    public void redissonZSet() throws ExecutionException, InterruptedException {
+
+        RScoredSortedSet<Object> member = redissonClient.getScoredSortedSet("member");
+        member.add(50, "小王");
+        member.add(50, "小刘");
+        member.add(50, "小张");
+        member.add(50, "小杨");
+        member.add(50, "小赵");
+        member.add(50, "小李");
+        RFuture<Collection<ScoredEntry<Object>>> collectionRFuture = member.entryRangeReversedAsync(0, -1);
+        log.info("获取所有元素before：{}", collectionRFuture.get());
+
+        //买了咖啡，Score加50
+        member.addScore("小王", 50);
+        //漂亮
+        member.addScore("小刘", 50);
+        //扣分
+        member.addScore("小张", -10);
+        //扣分
+        member.addScore("小赵", -20);
+        //拍马屁
+        member.addScore("小李", 10);
+        //翘课
+        member.remove("小杨");
+
+        RFuture<Collection<ScoredEntry<Object>>> collectionRFuture1 = member.entryRangeReversedAsync(0, -1);
+        log.info("获取所有元素after：{}", collectionRFuture1.get());
     }
 
     /**
