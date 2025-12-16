@@ -43,5 +43,9 @@ spring:
         max-wait: -1ms
         min-idle: 0
 
+# Redisson 专属配置
+redisson:
+  codec: org.redisson.codec.JsonJacksonCodec
+
 query:
   count: 10

@@ -84,10 +84,10 @@ public class RedisController {
         commentList.addFirst("Thursday");
         commentList.addFirst("Friday");
 
-        log.info("按时间先后获取！");
+        log.info("按时间先进先出！");
         while (commentList.size() > 0) {
-            commentList.poll();
-            log.info("{}", commentList.pollLastAsync());
+            Object firstElement = commentList.pollFirst();
+            log.info("取出的元素: {}", firstElement);
         }
         return "SUCCESS";
     }
